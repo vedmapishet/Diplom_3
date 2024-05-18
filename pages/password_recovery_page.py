@@ -6,11 +6,11 @@ from pages.base_page import BasePage
 class PasswordRecoveryePage(BasePage):
     @allure.step('Заполнить поле email')
     def fill_email_field(self, email):
-        self.send_keys(LoginLocators.email_input, email)
+        self.send_keys(PasswordRecoveryeLocators.email_input, email)
 
     @allure.step('Заполнить поле пароль')
     def fill_password_field(self, password):
-        self.send_keys(LoginLocators.password_input, password)
+        self.send_keys(PasswordRecoveryeLocators.password_input, password)
 
     @allure.step('Нажать на кнопку Восстановить пароль')
     def click_on_reset_button(self):
@@ -33,4 +33,4 @@ class PasswordRecoveryePage(BasePage):
     @allure.step('Вернуть тип поля, в которое введен пароль')
     def return_tipe_field(self):
         self.click_on_element(PasswordRecoveryeLocators.show_password_button)
-        return self.get_attribute_value(LoginLocators.password_input, 'type')
+        return self.get_attribute_value(PasswordRecoveryeLocators.password_input, 'type')

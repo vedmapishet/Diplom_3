@@ -10,13 +10,7 @@ class MainPage(BasePage):
         self.click_on_element(MainLocators.buns_constructor_locator)
 
 
-    @allure.step("Клик на кнопку Лента заказов")
-    def transition_order_feed(self):
-        self.click_on_element(MainLocators.order_feed_title_locator)
 
-    @allure.step("Проверка наличия заголовка Собери бургер")
-    def title_constructor(self):
-        self.switch_window(MainLocators.title_order_feed, 1)
 
     @allure.step('Проверка наличия заголовка Лента заказов')
     def title_order_feed(self):
@@ -33,11 +27,6 @@ class MainPage(BasePage):
         self.wait_element_clickable(MainLocators.closed_button)
         self.click_on_element(MainLocators.closed_button)
 
-
-    @allure.step('Кликаем на крестик у popup с информацией о созданном заказе')
-    def popup_window_closed_button_order(self):
-        self.wait_element_clickable(MainLocators.closed_button_order)
-        self.click_on_element(MainLocators.closed_button_order)
 
 
 
@@ -57,9 +46,6 @@ class MainPage(BasePage):
     def add_ingredient(self):
         self.drag_and_drop_on_element(MainLocators.ab, MainLocators.designer)
 
-    @allure.step("Клик на кнопку Оформить заказ")
-    def click_make_order(self):
-        self.click_on_element(MainLocators.make_order_button)
 
 
     @allure.step('Получить номер оформленного заказа')
@@ -69,3 +55,19 @@ class MainPage(BasePage):
     @allure.step('Получить номер оформленного заказа')
     def checking_availability_order_number_1(self):
         return self.get_text_from_element(MainLocators.number_order)
+
+    @allure.step("Клик на кнопку Лента заказов")
+    def transition_order_feed(self):
+        self.click_on_element(MainLocators.order_feed_title_locator)
+
+    @allure.step("Получение текста заголовка Собери заказ")
+    def get_title_text(self):
+        return self.get_text_of_element(MainLocators.constructor_title_locator)
+
+    @allure.step("Получение текста заголовка Детали заказа")
+    def get_title_text_detali(self):
+        return self.get_text_of_element(MainLocators.title_first_element)
+
+    @allure.step("Клик на кнопку Оформить заказ")
+    def click_make_order(self):
+        self.click_on_element(OrderLocators.make_order_button)

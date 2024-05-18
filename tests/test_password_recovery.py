@@ -9,7 +9,7 @@ class TestLoginPage:
     @allure.title('Проверка перехода на форму Восстановление пароля')
     def test_checking_transition_password_recovery_form(self, driver):
         reset_pass_page = PasswordRecoveryePage(driver)
-        reset_pass_page.go_to_site(DataTest.main_page)
+
         profile_page = ProfilePage(driver)
         profile_page.transition_profile()
         reset_pass_page.click_on_reset_password()
@@ -19,7 +19,7 @@ class TestLoginPage:
     @allure.title('Проверка перехода на форму с вводом нового пароля')
     def test_checking_transition_to_form_with_entering_new_password(self, driver):
         reset_pass_page = PasswordRecoveryePage(driver)
-        reset_pass_page.go_to_site(DataTest.main_page)
+
         profile_page = ProfilePage(driver)
         profile_page.transition_profile()
 
@@ -32,7 +32,7 @@ class TestLoginPage:
     @allure.title('Проверка отображения пароля, при нажатии кнопка "Показать пароль" ')
     def test_checking_password_display_when_show_password_button_is_pressed(self, driver):
         reset_pass_page = PasswordRecoveryePage(driver)
-        reset_pass_page.go_to_site(DataTest.main_page)
+
         profile_page = ProfilePage(driver)
         profile_page.transition_profile()
         reset_pass_page.click_on_reset_password()

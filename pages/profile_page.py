@@ -2,6 +2,7 @@ import allure
 from locators import *
 from selenium.common import ElementClickInterceptedException, TimeoutException
 from pages.base_page import BasePage
+from data import DataTest
 
 
 class ProfilePage(BasePage):
@@ -11,14 +12,13 @@ class ProfilePage(BasePage):
         self.click_on_element(ProfileLocators.profile_button)
 
     @allure.step("Авторизация")
-    def data_entry_form_auth(self, email, password):
-        self.find_element_located_input(ProfileLocators.email_input, email)
-        self.find_element_located_input(ProfileLocators.password_input, password)
+    def data_entry_form_auth(self):
+        self.find_element_located_input(ProfileLocators.email_input, DataTest.test_email)
+        self.find_element_located_input(ProfileLocators.password_input, DataTest.test_password)
         self.wait_for_invisibility_element(ProfileLocators.button_open_profile)
 
     @allure.step("Переход в раздел «История заказов»")
     def transition_history_order(self):
-        self.wait_element_clickable(ProfileLocators.history_order_button)
         self.click_on_element(ProfileLocators.history_order_button)
 
 
@@ -41,4 +41,14 @@ class ProfilePage(BasePage):
     @allure.step('Проверка отображения формы "Личного кабинета"')
     def check_profile_area_form(self):
         return self.check_element(ProfileLocators.profile_form)
+
+    @allure.step("Получение текста заголовка Вход")
+    def get_title_text_open(self):
+        return self.wait_for_element(ProfileLocators.title_open_profile)
+
+
+
+
+
+
 

@@ -9,31 +9,23 @@ class BasePage:
         self.driver = driver
 
 
-    @allure.step("Открыть сайт")
-    def go_to_site(self, url):
-        return self.driver.get(url)
-
     @allure.step('Получение текста элемента')
     def get_text_of_element(self, locator):
         return self.driver.find_element(*locator).text
 
     @allure.step('Ожидание и получение текста элемента')
     def wait_for_element(self, locator):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(locator))
+        self.find_element_located(locator)
         return self.get_text_from_element(locator)
 
     @allure.step('Ожидание и клик на элемент')
     def find_element_located_click(self, locator):
-        WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable(locator))
+        self.wait_element_clickable(locator)
         return self.driver.find_element(*locator).click()
 
     @allure.step('Ожидание и поиск элемента')
     def find_element_located(self, locator):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(locator))
-
-    def find_elements_located(self, locator):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located(locator))
-
 
 
     @allure.step("Получение текущего url")
@@ -47,15 +39,8 @@ class BasePage:
 
 
     def wait_for_invisibility_element(self, locator):
-        WebDriverWait(self.driver, 25).until(EC.visibility_of_element_located(locator)).click()
+        self.find_element_with_wait(locator).click()
 
-    @allure.step("Проверка видимости элемента пользователю")
-    def element_displayed(self, locator):
-        try:
-            self.driver.find_element_with_wait(locator)
-            return True
-        finally:
-            return False
 
 
     @allure.step("Получение текста элемента")
@@ -72,13 +57,9 @@ class BasePage:
         action.drag_and_drop(draggable, droppable)
         action.perform()
 
-    def click_button(self, locator):
-        self.wait_element_clickable(locator)
-        self.driver.find_element(*locator).click()
 
     def click_on_element(self, locator):
         element = self.find_element_with_wait(locator)
-
         action = ActionChains(self.driver)
         action.move_to_element(element)
         action.click()
@@ -92,19 +73,12 @@ class BasePage:
     def wait_element_clickable(self, locator):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
 
-    def click_button(self, locator):
-        self.wait_element_clickable(locator)
-        self.driver.find_element(*locator).click()
 
     # Проверка отображения элемента
     def check_element(self, locator):
         self.wait_for_load_element(locator)
         return self.driver.find_element(*locator)
 
-    def wait_for_load_element(self, locator):
-        WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(locator))
-
-        return self.driver.find_element(*locator)
 
     def wait_disappear_element(self, locator):
         WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located(locator))

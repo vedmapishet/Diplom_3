@@ -1,6 +1,7 @@
 import allure
 import pytest
 from selenium import webdriver
+from data import DataTest
 
 
 
@@ -13,6 +14,7 @@ def driver(request):
         options.add_argument("--height=1080")
 
         driver = webdriver.Firefox(options=options)
+        driver.get(DataTest.main_page)
 
 
     elif 'chrome' in request.param:
@@ -21,7 +23,9 @@ def driver(request):
         options.add_argument("--window-size=1920,1080")
 
         driver = webdriver.Chrome(options=options)
+        driver.get(DataTest.main_page)
 
     yield driver
 
     driver.quit()
+
